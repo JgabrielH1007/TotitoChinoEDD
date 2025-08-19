@@ -6,12 +6,10 @@ class PilaPowerUps {
         NodoPila* cima;
     public:
         PilaPowerUps();
-        ~PilaPowerUps();
-        void agregarPowerUp(const PowerUp& powerUp);
-        PowerUp quitarPowerUp();
-        bool estaVacia() const;
-        PowerUp verCima() const;
+        void push(PowerUp* powerUp);
+        PowerUp* pop();
+        PowerUp* peek();
+        bool isEmpty();
+        void clear();
 };
-
-
 #endif

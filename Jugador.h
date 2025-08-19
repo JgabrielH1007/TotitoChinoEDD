@@ -6,8 +6,9 @@
 
 class Jugador {
 private:
-    std::string caracter;
-    int puntos;
+    std::string caracter = "";
+    int puntos = 0;
+    bool enTurno = false;
     PilaPowerUps pilaPowerUps;
 
 public:
@@ -15,7 +16,11 @@ public:
     ~Jugador();
     void agregarPowerUp(const PowerUp& powerUp);
     PowerUp quitarPowerUp();
-    bool tienePowerUps() const;
+    bool getEnTurno() const;
+    void setEnTurno(bool enTurno);
+    std::string getCaracter() const;
+    int getPuntos() const;
+    void setPuntos(int puntos);
 
 };
 
