@@ -34,7 +34,7 @@ void AdministradorDeJuego::registrarTamanioTablero() {
     do {
         std::cout << "Ingrese el numero de filas (minimo 2): ";
         std::cin >> filas;
-        std::cout<<"Ingrese el numero de columnas (minimo 2)";
+        std::cout<<"Ingrese el numero de columnas (minimo 2): ";
         std::cin >> columnas;
         if (std::cin.fail()) {
             std::cin.clear(); 
