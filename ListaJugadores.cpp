@@ -1,23 +1,25 @@
 #include "ListaJugadores.h"
-#include "Jugador.h"
 #include "NodoJugadores.h"
-#include <iostream>
+#include "Jugador.h"
 
-ListaJugadores::ListaJugadores() : inicio(nullptr),final(nullptr), cantidad(0) {}
+ListaJugadores::ListaJugadores() : inicio(nullptr), final(nullptr), cantidad(0) {}
 
-void ListaJugadores::agregarJugador(const Jugador& jugador) {
+void ListaJugadores::agregarJugador(const Jugador* jugador) {
     NodoJugadores* nuevoNodo = new NodoJugadores();
-    nuevoNodo->jugador = new Jugador(jugador);
-    if(inicio == nullptr) {
+    nuevoNodo->setJugador(new Jugador(*jugador));
+
+    if (inicio == nullptr) {
         inicio = nuevoNodo;
         final = nuevoNodo;
+        final->setSiguiente(inicio);
     } else {
-        final->siguiente = nuevoNodo;
-        nuevoNodo->siguiente = inicio;
+        final->setSiguiente(nuevoNodo);
+        nuevoNodo->setSiguiente(inicio);
         final = nuevoNodo;
     }
     cantidad++;
 }
+
 
 void ListaJugadores::eliminarJugador(const std::string& caracter) {
     if (estaVacia()) return;
@@ -26,23 +28,23 @@ void ListaJugadores::eliminarJugador(const std::string& caracter) {
     NodoJugadores* anterior = nullptr;
 
     do {
-        if (actual->jugador->getCaracter() == caracter) {
+        if (actual->getJugador()->getCaracter() == caracter) {
             if (anterior == nullptr) { 
-                inicio = actual->siguiente;
-                final->siguiente = inicio; 
+                inicio = actual->getSiguiente();
+                final->setSiguiente(inicio); 
             } else {
-                anterior->siguiente = actual->siguiente;
+                anterior->setSiguiente(actual->getSiguiente());
                 if (actual == final) {
                     final = anterior;
                 }
             }
-            delete actual->jugador;
+            delete actual->getJugador();
             delete actual;
             cantidad--;
             return; 
         }
         anterior = actual;
-        actual = actual->siguiente;
+        actual = actual->getSiguiente();
     } while (actual != inicio);
 }
 
@@ -52,4 +54,12 @@ bool ListaJugadores::estaVacia() const {
 
 int ListaJugadores::getCantidad() const {
     return cantidad;
+}
+
+NodoJugadores* ListaJugadores::getInicio() const {
+    return inicio;
+}
+
+NodoJugadores* ListaJugadores::getFinal() const {
+    return final;
 }

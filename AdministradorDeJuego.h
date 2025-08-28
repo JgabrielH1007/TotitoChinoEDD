@@ -14,19 +14,23 @@
 #include "TrampaSecreta.h"
 #include "ListaJugadores.h"
 #include "PilaPowerUps.h"
+#include "AdministradorDeTablero.h"
 
 class AdministradorDeJuego {
     private:
+        int indiceEnTurno = 0;
         ListaJugadores listaJugadores;
+        AdministradorDeTablero administradorDeTablero;
     public:
         AdministradorDeJuego();
+        void iniciarJuego();
+        void registrarTamanioTablero();
         void recolectarInfomacionJugadores();
         void guardarJugadores(std::string caracter);
-        void administrarTurnos();
-        void mostrarTablero();
-        bool hayGanador() const;
-        void manejarPowerUp(Jugador& jugador, PowerUp* powerUp);
+        Jugador* obtenerJugadorEnTurno() const;
         void Jugar();
+        int menuJuego()const;
+        void mostrarGanador() const;
         
 };
 

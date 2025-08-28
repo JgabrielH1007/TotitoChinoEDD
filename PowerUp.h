@@ -7,6 +7,9 @@ class PowerUp {
         std::string nombre; 
     public:
         PowerUp(const std::string& nombre) : nombre(nombre) {}
+        std::string getNombre() const {
+            return nombre;
+        }
         
 }; 
 

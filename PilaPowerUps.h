@@ -6,9 +6,9 @@ class PilaPowerUps {
         NodoPila* cima;
     public:
         PilaPowerUps();
-        void push(PowerUp* powerUp);
-        PowerUp* pop();
-        PowerUp* peek();
+        void apilar(PowerUp* powerUp);
+        PowerUp* desapilar();
+        void imprimir() const;
         bool isEmpty();
         void clear();
 };

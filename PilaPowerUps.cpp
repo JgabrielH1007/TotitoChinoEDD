@@ -1,17 +1,18 @@
 #include "PilaPowerUps.h"
 #include "NodoPila.h"
 #include "PowerUp.h"
+#include <iostream>
 
 PilaPowerUps::PilaPowerUps() : cima(nullptr) {}
 
-void PilaPowerUps::push(PowerUp* powerUp) {
+void PilaPowerUps::apilar(PowerUp* powerUp) {
     NodoPila* nuevoNodo = new NodoPila();
     nuevoNodo->powerUp = powerUp;
     nuevoNodo->siguiente = cima;
     cima = nuevoNodo;
 }
 
-PowerUp* PilaPowerUps::pop() {
+PowerUp* PilaPowerUps::desapilar() {
     if (isEmpty()) return nullptr;
     NodoPila* nodoAEliminar = cima;
     PowerUp* powerUp = nodoAEliminar->powerUp;
@@ -20,16 +21,25 @@ PowerUp* PilaPowerUps::pop() {
     return powerUp;
 }
 
-PowerUp* PilaPowerUps::peek() {
-    if (isEmpty()) return nullptr;
-    return cima->powerUp;
+void PilaPowerUps::imprimir() const {
+    NodoPila* actual = cima;
+    if (cima == nullptr) {
+        std::cout << "La pila está vacía." << std::endl;
+        return;
+    }
+    while (actual != nullptr) {
+        std::cout<< actual->powerUp->getNombre() << " ";
+        actual = actual->siguiente;
+    }
+    std::cout << std::endl;
 }
+
 bool PilaPowerUps::isEmpty() {
     return cima == nullptr;
 }
 
 void PilaPowerUps::clear() {
     while (!isEmpty()) {
-        pop();
+        desapilar();
     }
 }
